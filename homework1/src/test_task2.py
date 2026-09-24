@@ -1,24 +1,15 @@
 from task2 import information
 import pytest
+my_list = information()
+@pytest.mark.parametrize("test_input, expected",
+[
+    (my_list[0], str),
+    (my_list[1], int),
+    (my_list[2], bool),
+    (my_list[3], float)
 
-#@pytest.mark.parametrize("item", information())
-#def test_information(item):
-    #is_valid_type = isinstance(item, (str, int, float, bool))
+]
+)
 
-def test_correct_str():
-    my_list = information()
-    assert type(my_list[0]) == str
-
-def test_correct_int():
-    my_list = information()
-    assert type(my_list[1]) == int
-
-
-def test_correct_boolean():
-    my_list = information()
-    assert type(my_list[2]) == bool
-
-def test_correct_float():
-    my_list = information()
-    assert type(my_list[3]) == float
-
+def test_information(test_input, expected):
+    assert isinstance(test_input, expected)
