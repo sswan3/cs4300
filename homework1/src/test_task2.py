@@ -12,4 +12,4 @@ my_list = information()
 )
 
 def test_information(test_input, expected):
-    assert isinstance(test_input, expected)
+    assert type(test_input) == expected
