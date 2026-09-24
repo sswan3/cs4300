@@ -1,16 +1,33 @@
 from task3 import positive_or_negative
 from task3 import sum_num
 from task3 import prime_num
+import pytest
 
-#verifying that the numbers are only ints or floats
+#verifying that the numbers are only ints or floats------
 def test_check_with_int():
-    val = positive_or_negative(8)
+    val = positive_or_negative(7)
     assert type(val) in (float, int)
 
 def test_check_with_float():
     val = positive_or_negative(8.12)
     assert type(val) in (float, int)
+#---------------------------------------------------------
 
+#verifying that the results of positive_or_negative are accurate..................................
+@pytest.mark.parametrize("test_input, expected",
+[
+    (4, "positive\n"), #testing for positive number
+    (-3, "negative\n"), #testing for negative number
+    (0, "zero\n")       #testing for number 0
+]
+)
+#capture output and compare to correct answer
+def test_myoutput(capsys, test_input, expected): 
+    positive_or_negative(test_input)
+    captured = capsys.readouterr()
+    assert captured.out == expected
+#...........................................................................................
+ 
 #verifying that the sum is correct
 def test_sum_num():
     val = sum_num()

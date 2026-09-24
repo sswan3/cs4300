@@ -1,10 +1,10 @@
 def positive_or_negative(given_number):
     if given_number > 0:
-        print("The number is positive.")
+        print("positive")
     elif given_number < 0:
-        print("The number is negative.")
+        print("negative")
     else:
-        print("The number is zero.")
+        print("zero")
     return given_number
 
 def sum_num():
