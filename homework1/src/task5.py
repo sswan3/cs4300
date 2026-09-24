@@ -17,5 +17,3 @@ def student_base():
         "Tammy": "390-644",
     }
     return student_database
-
-print(student_base())
