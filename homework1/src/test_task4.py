@@ -1,5 +1,7 @@
 import random
 from task4 import calculate_discount
+import pytest
+
 
 def test_ints_only():
     #test with only ints
@@ -26,7 +28,22 @@ def test_many_decimal_places():
     result5 = calculate_discount(13.3333999700, 5.22220201)
     assert result5 == 12.64
 
+def test_negative_price():
+    val = calculate_discount(-70,4)
+    assert val == "price must be positive"
 
+def test_negative_discount():
+    val = calculate_discount(50, -25)
+    assert val == "discount must be positive"
+
+def test_big_discount():
+    val = calculate_discount(50, 250)
+    assert val == "discount must be less than 100"
+
+def test_not_number_price():
+    letter = "s"
+    val = calculate_discount(letter, 250)
+    assert val == "error must be number"
 
 
 

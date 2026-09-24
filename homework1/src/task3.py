@@ -1,4 +1,5 @@
 def positive_or_negative(given_number):
+    """Determine whether the given number is positive negative or 0"""
     if given_number > 0:
         print("positive")
     elif given_number < 0:
@@ -8,6 +9,7 @@ def positive_or_negative(given_number):
     return given_number
 
 def sum_num():
+    """Sum numbers 1-100"""
     i = 1
     sum = 0
     while i <= 100:
@@ -17,6 +19,7 @@ def sum_num():
     return sum
 
 def prime_num():
+    """Calculate the first 10 prime numbers"""
     n = 0
     prime_numbers = []
 

@@ -18,11 +18,13 @@ def test_check_with_float():
 [
     (4, "positive\n"), #testing for positive number
     (-3, "negative\n"), #testing for negative number
-    (0, "zero\n")       #testing for number 0
+    (0, "zero\n"),       #testing for number 0
+    (-0.0003, "negative\n"), #test negative float
+    (0.5, "positive\n") #test positive float
 ]
 )
 #capture output and compare to correct answer
-def test_myoutput(capsys, test_input, expected): 
+def test_positive_or_negative_output(capsys, test_input, expected): 
     positive_or_negative(test_input)
     captured = capsys.readouterr()
     assert captured.out == expected
