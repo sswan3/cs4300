@@ -29,21 +29,22 @@ def test_many_decimal_places():
     assert result5 == 12.64
 
 def test_negative_price():
-    val = calculate_discount(-70,4)
-    assert val == "price must be positive"
+    with pytest.raises(ValueError):
+        calculate_discount(-60, 30)
 
 def test_negative_discount():
-    val = calculate_discount(50, -25)
-    assert val == "discount must be positive"
+    with pytest.raises(ValueError):
+        calculate_discount(60, -30)
 
 def test_big_discount():
-    val = calculate_discount(50, 250)
-    assert val == "discount must be less than 100"
+    with pytest.raises(ValueError):
+        calculate_discount(35.50, 250)
 
 def test_not_number_price():
     letter = "s"
-    val = calculate_discount(letter, 250)
-    assert val == "error must be number"
+    with pytest.raises(TypeError):
+        calculate_discount(letter, 60)
+
 
 
 
