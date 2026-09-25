@@ -1,4 +1,3 @@
-import random
 from task4 import calculate_discount
 import pytest
 
@@ -44,6 +43,11 @@ def test_not_number_price():
     letter = "s"
     with pytest.raises(TypeError):
         calculate_discount(letter, 60)
+
+def test_not_number_discount():
+    letter = "say hi"
+    with pytest.raises(TypeError):
+        calculate_discount(60, letter)
 
 
 

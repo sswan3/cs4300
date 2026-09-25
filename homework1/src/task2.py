@@ -1,5 +1,6 @@
 
 def information():
+    """function that demonstrates the use of various data types and puts them into a list"""
     name = "Savannah"
     age = 22
     is_student = True
