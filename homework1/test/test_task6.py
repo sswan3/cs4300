@@ -7,6 +7,8 @@ import pytest
     ("task6_read_me_dogs.txt", 4),
     ("task6_read_me_food.txt", 7),
     ("task6_read_me_house.txt", 2),
+    ("task6_read_me.txt", 104),
+    
 ]
 )
 
