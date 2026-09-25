@@ -1,6 +1,6 @@
 import string
 def word_count():
-
+    """function that reads from a file and counts the words and returns the word count"""
     count = 0
     list = []
     list2 = []
@@ -19,4 +19,5 @@ def word_count():
 
 
     word_count = len(list2)
+    print(word_count)
     return word_count
