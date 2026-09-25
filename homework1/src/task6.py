@@ -1,9 +1,10 @@
 import string
+from pathlib import Path
 def word_count():
     """function that reads from a file and counts the words and returns the word count"""
     BASE_DIR = Path(__file__).resolve().parent.parent
     FILE_PATH = BASE_DIR / "task6_read_me.txt"
-    
+
     count = 0
     list = []
     list2 = []
