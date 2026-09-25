@@ -1,11 +1,14 @@
 import string
 def word_count():
     """function that reads from a file and counts the words and returns the word count"""
+    BASE_DIR = Path(__file__).resolve().parent.parent
+    FILE_PATH = BASE_DIR / "task6_read_me.txt"
+    
     count = 0
     list = []
     list2 = []
 
-    with open("task6_read_me.txt", "r", encoding="utf-8") as file:
+    with open(FILE_PATH, "r", encoding="utf-8") as file:
         for line in file:
             # Split each line into individual words
             for word in line.split():
