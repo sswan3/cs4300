@@ -1,17 +1,16 @@
 #Advanced Software Engineering HW1
 
 ##Setup
+IMPORTANT: the requirements.txt has too many things. Delete them all until your just left with the following so pip install works:
+numpy==2.5.3
+pytest==9.1.1
+wonderwords==3.0.1
 
 -create SSH key and add to Github repository
 
 -create a venv: "python3 -m venv your_custom_env_name_here --system-site-packages"
 
 -source a venv: "source your_custom_env_name_here / bin / activate"
-
-IMPORTANT: the requirements.txt has too many things. Delete them all until your just left with the following so pip install works:
-numpy==2.5.3
-pytest==9.1.1
-wonderwords==3.0.1
 
 -install pytest: "python3 -m pip install pytest"
 
