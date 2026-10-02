@@ -13,7 +13,7 @@ class Movie(models.Model):
 
 
 class Seat(models.Model):
-     seat_number = models.PositiveIntegerField():
+     seat_number = models.PositiveIntegerField()
      booking_status = models.CharField(max_length=100)
 
      def __str__(self):
