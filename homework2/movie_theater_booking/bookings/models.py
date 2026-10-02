@@ -14,7 +14,7 @@ class Movie(models.Model):
 
 class Seat(models.Model):
      seat_number = models.PositiveIntegerField()
-     booking_status = models.CharField(max_length=100)
+     booking_status = models.BooleanField(default=False)
 
      def __str__(self):
         return f"Seat {self.seat_number}"

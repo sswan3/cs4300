@@ -26,5 +26,5 @@ router.register(r"bookings", views.BookingViewSet)
 
 urlpatterns = [
     path("api/", include(router.urls)),
-    #path('admin/', admin.site.urls),
+    path('admin/', admin.site.urls),
 ]
