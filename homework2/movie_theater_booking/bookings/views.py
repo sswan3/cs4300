@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from .models import Movie, Seat, Booking
-from rest_framework import permissions, viewsets
+from rest_framework import permissions, viewsets, serializers
 from .serializers import MovieSerializer, SeatSerializer, BookingSerializer
 
 # Create your views here.
@@ -22,11 +22,11 @@ class BookingViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
 
-        return queryset.filter(user=self.request.user)
+        return Booking.objects.filter(user=self.request.user)
 
     def perform_create(self, serializer):
 
-        if get_queryset().seat.booking_status == False:
+        if serializer.validated_data["seat"].booking_status == False:
             booking_object = serializer.save(user=self.request.user)
             booking_object.seat.booking_status = True
             booking_object.seat.save()
