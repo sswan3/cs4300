@@ -22,9 +22,12 @@ class BookingViewSet(viewsets.ModelViewSet):
 
     def perform_create(self, serializer):
         booking_object = serializer.save(user=self.request.user)
-        booking_object.seat.booking_status = True
-        booking_object.seat.save()
-        
+        if booking_object.seat.booking_status = False:
+            booking_object.seat.booking_status = True
+            booking_object.seat.save()
+        else:
+            print("This seat is already booked")
+            
 
 
 
