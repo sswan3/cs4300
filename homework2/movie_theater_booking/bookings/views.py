@@ -20,14 +20,18 @@ class BookingViewSet(viewsets.ModelViewSet):
     serializer_class = BookingSerializer
     permission_classes = [permissions.IsAuthenticated]
 
+    def get_queryset(self):
+
+        return queryset.filter(user=self.request.user)
+
     def perform_create(self, serializer):
-        super().get_queryset(self.request.user) 
-        booking_object = serializer.save(user=self.request.user)
-        if booking_object.seat.booking_status = False:
+
+        if get_queryset().seat.booking_status == False:
+            booking_object = serializer.save(user=self.request.user)
             booking_object.seat.booking_status = True
             booking_object.seat.save()
         else:
-            print("This seat is already booked")
+           raise serializers.ValidationError('This seat is already booked. Choose a different seat.')
             
 
 
