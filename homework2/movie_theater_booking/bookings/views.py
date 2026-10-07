@@ -21,8 +21,10 @@ class BookingViewSet(viewsets.ModelViewSet):
 
     def perform_create(self, serializer):
         booking_object = serializer.save(user=self.request.user)
-        change_status = booking_object.seat.booking_status = True
-        change_status.save()
+        booking_object.seat.booking_status = True
+        booking_object.seat.booking_status.save()
+        permissions_classes = [permissions.IsAuthenticated] 
+        
 
 
 
