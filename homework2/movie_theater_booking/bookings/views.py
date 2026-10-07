@@ -18,12 +18,12 @@ class BookingViewSet(viewsets.ModelViewSet):
 
     queryset = Booking.objects.all()
     serializer_class = BookingSerializer
+    permission_classes = [permissions.IsAuthenticated] 
 
     def perform_create(self, serializer):
         booking_object = serializer.save(user=self.request.user)
         booking_object.seat.booking_status = True
-        booking_object.seat.booking_status.save()
-        permissions_classes = [permissions.IsAuthenticated] 
+        booking_object.seat.save()
         
 
 
