@@ -20,8 +20,9 @@ class BookingViewSet(viewsets.ModelViewSet):
     serializer_class = BookingSerializer
 
     def perform_create(self, serializer):
-        serializer.save(user=self.request.user)
-        Booking.seat.booking_status == "True"
+        booking_object = serializer.save(user=self.request.user)
+        change_status = booking_object.seat.booking_status = True
+        change_status.save()
 
 
 
