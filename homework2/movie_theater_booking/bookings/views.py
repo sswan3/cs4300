@@ -11,6 +11,14 @@ class MovieViewSet(viewsets.ModelViewSet):
 
     queryset = Movie.objects.all()
     serializer_class = MovieSerializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+
+    def movie_view(request):
+        context = {
+            "movies": queryset
+        }
+        return render(request, "templates/bookings/movie_list.html", context)
+
 
 class SeatViewSet(viewsets.ModelViewSet):
     queryset = Seat.objects.all()
