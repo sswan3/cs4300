@@ -10,6 +10,7 @@ class SeatSerializer(serializers.ModelSerializer):
     class Meta:
         model = Seat
         fields = ["id","seat_number", "booking_status"]
+        read_only_fields = ['booking_status'] 
 
 
 class BookingSerializer(serializers.ModelSerializer):
