@@ -4,7 +4,7 @@ from django.db import migrations
 
 def add_seats(apps, schema_editor):
     Seat = apps.get_model("bookings", "Seat")
-    seat_num = 0
+    seat_num = 1
     while seat_num <= 15:
         Seat.objects.create(seat_number = seat_num, booking_status = False)
         seat_num += 1

@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from .models import Movie, Seat, Booking
 from rest_framework import permissions, viewsets, serializers
 from .serializers import MovieSerializer, SeatSerializer, BookingSerializer
@@ -50,9 +50,9 @@ def movie_view(request):
     }
     return render(request, "bookings/movie_list.html", context)
 
-def booking_view(request):
+def booking_view(request, movie_id):
     context = {
         "seats": Seat.objects.all(), 
-        "movies": Movies.objects.all() 
+        "movies": (get_object_or_404(Movie, id=movie_id))
     }
-    return render(request, "booking/seat_booking.html", context)
+    return render(request, "bookings/seat_booking.html", context)

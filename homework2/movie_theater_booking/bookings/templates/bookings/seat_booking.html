@@ -4,21 +4,25 @@
 <h2>Book Now!</h2>
 <ul class = "booking">
     <li 
-    {% for movie in movies %}
-    <h5>{{ movie.title }} </h5>
-    <p>{{ movie.duration }}</p>
-    <p>{{ movie.release_date }}</p>
-    { % endfor}
-    {% for seat in seats}
+        {% for movie in movies %}
+            <h5>{{ movie.title }} </h5>
+            <p>{{ movie.duration }}</p>
+            <p>{{ movie.release_date }}</p>
+    <li/>
+        { % endfor %}
+    <li>
+        
+    {% for seat in seats %}
     {% if seat.booking_status == False %}
         <form method="post">
             {% csrf_token %}
-            <button type="submit" name="seat" value="7" class="btn btn-success">seat.seat_number</button>
+            <button type="submit" name="seat" value={{seat.id}} class="btn btn-success">{{seat.seat_number}}</button>
         </form>
     {% else %}
         <form method="post">
             {% csrf_token %}
-            <button type="submit" name="seat" value="7" class="btn btn-secondary">seat.seat_number</button>
+            <button type="submit" name="seat" value= {{seat.id}} class="btn btn-secondary" disabled>{{seat.seat_number}}</button>
+        </form>
     {% endif %}
 
 
