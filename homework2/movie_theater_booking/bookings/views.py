@@ -1,9 +1,11 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from .models import Movie, Seat, Booking
 from rest_framework import permissions, viewsets, serializers
 from .serializers import MovieSerializer, SeatSerializer, BookingSerializer
 from rest_framework.decorators import action
 from rest_framework.response import Response
+from datetime import datetime
+
 
 
 # Create your views here.
@@ -51,6 +53,18 @@ def movie_view(request):
     return render(request, "bookings/movie_list.html", context)
 
 def booking_view(request, movie_id):
+    movie = get_object_or_404(Movie, id=movie_id)
+    if request.method == "POST":
+        id = request.POST["seat"] 
+        seat = get_object_or_404(Seat, id= seat_id)
+        date = date.today()
+
+        if seat.booking_status == False:
+            Booking.objects.create(movie, seat, date, user=request.user,)
+            seat.booking_status = True
+            seat.save()
+            return redirect("movie_list")
+
     context = {
         "seats": Seat.objects.all(), 
         "movie": (get_object_or_404(Movie, id=movie_id))
