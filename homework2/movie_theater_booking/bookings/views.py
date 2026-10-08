@@ -53,6 +53,6 @@ def movie_view(request):
 def booking_view(request, movie_id):
     context = {
         "seats": Seat.objects.all(), 
-        "movies": (get_object_or_404(Movie, id=movie_id))
+        "movie": (get_object_or_404(Movie, id=movie_id))
     }
     return render(request, "bookings/seat_booking.html", context)
