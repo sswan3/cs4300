@@ -13,13 +13,6 @@ class MovieViewSet(viewsets.ModelViewSet):
     serializer_class = MovieSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
-    def movie_view(request):
-        context = {
-            "movies": queryset
-        }
-        return render(request, "templates/bookings/movie_list.html", context)
-
-
 class SeatViewSet(viewsets.ModelViewSet):
     queryset = Seat.objects.all()
     serializer_class = SeatSerializer
@@ -51,9 +44,15 @@ class BookingViewSet(viewsets.ModelViewSet):
         else:                                                         #else, that means the seat was already taken from someone else and raise error
            raise serializers.ValidationError('This seat is already booked. Choose a different seat.')
             
+def movie_view(request):
+    context = {
+        "movies": Movie.objects.all()
+    }
+    return render(request, "bookings/movie_list.html", context)
 
-
-
-    
-
-
+def booking_view(request):
+    context = {
+        "seats": Seat.objects.all(), 
+        "movies": Movies.objects.all() 
+    }
+    return render(request, "booking/seat_booking.html", context)

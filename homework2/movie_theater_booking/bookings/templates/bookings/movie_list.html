@@ -3,13 +3,12 @@
 {% block content %}
 <h2>Available Movies</h2>
 <ul class = "movies">
-    <li {{% for movie in movies %}}
+    <li 
+    {% for movie in movies %}
     <h5>{{ movie.title }} </h5>
     <p>{{ movie.description }}</p>
     <p>{{ movie.release_date }}</p>
     <p>{{ movie.duration }}</p>
-    <a href = "{%'https://app-cosmicheron1415-28.lab.devedu.io/movies'}" class="btn btn-primary">
-        Book Now</a>
     </li>
     {% endfor %}
 </ul>

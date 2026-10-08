@@ -28,4 +28,6 @@ urlpatterns = [
     path("api/", include(router.urls)),
     path('admin/', admin.site.urls),
     path('api-auth/', include('rest_framework.urls')),
+    path("", views.movie_view, name="movie_list"),
+    path("", views.booking_view, name="seat_booking")
 ]
