@@ -11,6 +11,13 @@ class Movie(models.Model):
 
     def __str__(self):
         return self.title
+        
+    def clean(self):
+        # Validate duration on instance creation/cleaning
+        if not isinstance(self.duration, int):
+            raise ValidationError("Duration must be a number!")
+
+        
 
 
 class Seat(models.Model):

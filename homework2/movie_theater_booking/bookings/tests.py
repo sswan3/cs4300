@@ -16,6 +16,16 @@ class MovieTestCase(TestCase):
         self.assertEqual(str(movie.release_date), "2026-11-14")
         self.assertEqual(movie.duration, 2)
 
+class IncorrectMovieTestCase(TestCase):
+    def setUp(self):
+        Movie.objects.create(title="My Little Pony", description="friendship and love is learned"
+        ,release_date = "2026-11-14", duration="not_a_number")
+
+    def test_values(self):
+        movie = Movie.objects.get(title="My Little Pony")
+        self.assertIsInstance(movie.duration, str) 
+
+
 class SeatTestCase(TestCase):
     def setUp(self):
         Seat.objects.create(seat_number = 76, booking_status = False)
