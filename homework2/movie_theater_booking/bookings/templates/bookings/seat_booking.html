@@ -3,14 +3,14 @@
 {% block content %}
 <h2>Book Now!</h2>
 <ul class = "booking">
-    <li 
-            <h5>{{ movie.title }} </h5>
-            <p>{{ movie.duration }}</p>
-            <p>{{ movie.release_date }}</p>
+    <li>
+            <h5>Title: {{ movie.title }} </h5>
+            <p>Duration (hr): {{ movie.duration }}</p>
+            <p>Release Date: {{ movie.release_date }}</p>
     </li>
 
     {% for seat in seats %}
-    <li
+    <li>
     {% if seat.booking_status == False %}
         <form method="post">
             {% csrf_token %}

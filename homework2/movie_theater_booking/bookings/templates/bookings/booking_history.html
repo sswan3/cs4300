@@ -1,0 +1,16 @@
+{% extends 'bookings/base.html' %}
+{% block title %} Booking History {% endblock %}
+{% block content %}
+<h2>----------------------------------------------------------</h2>
+<ul class = "list-group history">
+    {% for hist in history %}
+    <li class="list-group-item mb-3"></li>
+        <h5>Title: {{ hist.movie.title }} </h5>
+        <p>Seat Number: {{ hist.seat.seat_number }}</p>
+        <p>Date booked: {{ hist.booking_date }}</p>
+    </li>
+    {% empty %}
+        <li class="list-group-item text-muted">No booking history found.</li>
+    {% endfor %}
+</ul>
+{% endblock %}
