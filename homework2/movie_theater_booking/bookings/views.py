@@ -53,7 +53,7 @@ def movie_view(request):
     }
     return render(request, "bookings/movie_list.html", context)
 
-@login_required
+@login_required(login_url='/api-auth/login/')
 def booking_view(request, movie_id):
     movie = get_object_or_404(Movie, id=movie_id)
     if request.method == "POST":
@@ -73,7 +73,7 @@ def booking_view(request, movie_id):
     }
     return render(request, "bookings/seat_booking.html", context)
 
-@login_required
+@login_required(login_url='/api-auth/login/')
 def booking_history_view(request):
     context = {
         "history": Booking.objects.filter(user=request.user)
