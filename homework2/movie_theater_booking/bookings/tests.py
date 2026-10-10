@@ -6,9 +6,33 @@ from datetime import date
 from rest_framework.test import APITestCase
 from rest_framework import status
 
+class SeatViewSetTestCase(APITestCase):
+    def setUP(self):
+        self.movie = Movie.objects.create(
+            title="My Little Pony",
+            description="friendship and love is learned",
+            release_date="2026-11-14",
+            duration=2
+        )
+
+    def test_get_queryset(self):
+        seat1 = Seat.objects.create(seat_number= 77, booking_status = False)
+        seat2 = Seat.objects.create(seat_number= 78, booking_status = False)
+        user1 = User.objects.create_user(username="lauren", password="testpass123")
+        user2 = User.objects.create_user(username="sam", password="testpass321")
+
+        # Authenticate the pre-built test client
+        self.client.force_authenticate(user=user1)
+        self.client.force_authenticate(user=user2)
+
+        today = date.today()
+
+        Booking.objects.create(movie= self.movie, user = self.user1, seat= self.seat1, booking_date= today)
+        Booking.objects.create(movie = self.movie, user= self.user2, booking_date=today,seat =self.seat2)
+
+
 class BookingViewSetTestCase(APITestCase):
     def setUp(self):
-        # Saved to self.* so test methods can access them
         self.movie = Movie.objects.create(
             title="My Little Pony",
             description="friendship and love is learned",
@@ -51,6 +75,7 @@ class BookingViewSetTestCase(APITestCase):
 
         response = self.client.post('/api/bookings/', payload, format='json')
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+        self.assertEqual(Booking.objects.count(), 1)
 
 
 
