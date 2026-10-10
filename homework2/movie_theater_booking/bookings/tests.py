@@ -17,6 +17,18 @@ class BookingViewSetTestCase(APITestCase):
         )
         self.seat = Seat.objects.create(seat_number=77, booking_status=False)
         self.user = User.objects.create_user(username="lauren", password="testpass123")
+    def test_not_loggedin_book_seat(self):
+        self.client.force_authenticate(user=None)
+        payload = {
+            "movie": self.movie.id,
+            "seat": self.seat.id,
+            "booking_date": str(date.today())
+        }
+
+        response = self.client.post('/api/bookings/', payload, format='json')
+
+        self.assertEqual response.status_code == status.HTTP_401, status.HTTP_403
+        self.assertEqual(Booking.objects.count(), 1)
 
     def test_login_book_seat(self):
         # Authenticate the pre-built test client
