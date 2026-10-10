@@ -5,27 +5,33 @@ from django.contrib.auth.models import User
 from datetime import date
 from rest_framework.test import APITestCase
 
-class BookingViewSet(APITestCase):
+class BookingViewSetTestCase(APITestCase):
     def setUp(self):
-        Movie.objects.create(title="My Little Pony", description="friendship and love is learned"
-        ,release_date = "2026-11-14", duration=2)
-
-    seat = Seat.objects.create(seat_number=77, booking_status=False)
-    booking_date = date.today()
-    Booking.objects.create(
-            movie=movie, 
-            seat=seat, 
-            user=user, 
-            booking_date=booking_date
+        # Saved to self.* so test methods can access them
+        self.movie = Movie.objects.create(
+            title="My Little Pony",
+            description="friendship and love is learned",
+            release_date="2026-11-14",
+            duration=2
         )
+        self.seat = Seat.objects.create(seat_number=77, booking_status=False)
+        self.user = User.objects.create_user(username="lauren", password="testpass123")
+
     def test_login_book_seat(self):
-        today = date.today()
-        book = Booking.objects.get(booking_date=today)
-        user = User.objects.create_user(username="lauren", password="testpass123")
-        client = APIClient()
-        client.force_authenticate(user=user)
-        response = client.post('/api/bookings/', {'movie': movie.title, 'seat': seat, 'user': user, 'booking_date':booking_date}, format='json')
+        # Authenticate the pre-built test client
+        self.client.force_authenticate(user=self.user)
+
+        # Send Primary Key IDs for ForeignKeys and ISO string for date
+        payload = {
+            "movie": self.movie.id,
+            "seat": self.seat.id,
+            "booking_date": str(date.today())
+        }
+
+        response = self.client.post('/api/bookings/', payload, format='json')
+
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+        self.assertEqual(Booking.objects.count(), 1)
 
 class MovieTestCase(TestCase):
     def setUp(self):
