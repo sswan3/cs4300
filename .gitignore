@@ -7,3 +7,7 @@ __pycache__/
 
 # pytest cache
 .pytest_cache/
+
+myenv/
+
+db.sqlite3

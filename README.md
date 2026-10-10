@@ -1,6 +1,6 @@
-#Advanced Software Engineering HW1
+# Advanced Software Engineering HW1
 
-##Setup
+## Setup
 IMPORTANT: the requirements.txt has too many things. Delete them all until your just left with the following so pip install works:
 numpy==2.5.3
 pytest==9.1.1
@@ -19,7 +19,7 @@ wonderwords==3.0.1
 -install dependencies from from requirements.txt
 
 
-##Running Tests
+## Running Tests
 
 -navigate to homework1 directory
 
@@ -27,12 +27,12 @@ wonderwords==3.0.1
 
 -pytest.ini handles the paths to different folders. pytest alone is sufficient to use
 
-##Running a Task
+## Running a Task
 
 -navigate to src folder
 -"python3 task1.py" will run task1
 
-##Running a Test
+## Running a Test
 
 -navigate to test folder
 -"pytest test_task1.py" runs test for task1.py
