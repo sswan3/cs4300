@@ -4,6 +4,7 @@ from django.core.exceptions import ValidationError
 from django.contrib.auth.models import User
 from datetime import date
 from rest_framework.test import APITestCase
+from rest_framework import status
 
 class BookingViewSetTestCase(APITestCase):
     def setUp(self):
@@ -32,6 +33,8 @@ class BookingViewSetTestCase(APITestCase):
 
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         self.assertEqual(Booking.objects.count(), 1)
+        self.seat.refresh_from_db()
+        self.assertEqual(self.seat.booking_status, True)
 
 class MovieTestCase(TestCase):
     def setUp(self):
