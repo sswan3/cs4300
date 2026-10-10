@@ -5,6 +5,26 @@ from django.contrib.auth.models import User
 from datetime import date
 from rest_framework.test import APITestCase
 from rest_framework import status
+class availabilityTestCase(APITestCase):
+    def setUp(self):
+        self.movie = Movie.objects.create(
+            title="My Little Pony",
+            description="friendship and love is learned",
+            release_date="2026-11-14",
+            duration=2
+        )
+    def test_availability(self):
+        seat1 = Seat.objects.create(seat_number= 77, booking_status = False)
+        seat2 = Seat.objects.create(seat_number= 78, booking_status = True)
+        seat3 = Seat.objects.create(seat_number= 79, booking_status = False)
+        user = User.objects.create_user(username="lauren", password="testpass123")
+        self.client.force_login(user)
+        response = self.client.get('/api/seats/availability/')
+
+        for s in response.data:
+            self.assertNotEqual(s, seat2.id)
+            if s ==seat1.id:
+                self.AssertEqual(s, seat1.id)
 
 class SeatViewSetTestCase(APITestCase):
     def setUp(self):
