@@ -126,6 +126,6 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-CSRF_TRUSTED_ORIGINS = ['https://*.devedu.io']
+CSRF_TRUSTED_ORIGINS = ['https://*.devedu.io', 'https://*.onrender.com']
 
 LOGIN_URL = '/api-auth/login/'
