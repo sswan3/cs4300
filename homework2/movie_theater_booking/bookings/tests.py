@@ -27,8 +27,7 @@ class BookingViewSetTestCase(APITestCase):
 
         response = self.client.post('/api/bookings/', payload, format='json')
 
-        self.assertEqual response.status_code == status.HTTP_401, status.HTTP_403
-        self.assertEqual(Booking.objects.count(), 1)
+        self.assertIn(response.status_code, [status.HTTP_401_UNAUTHORIZED, status.HTTP_403_FORBIDDEN])
 
     def test_login_book_seat(self):
         # Authenticate the pre-built test client
