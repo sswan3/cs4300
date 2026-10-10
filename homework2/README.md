@@ -4,7 +4,21 @@
 Go to this link: https://cs4300-n2ie.onrender.com
 add /admin/ to the link in the browswer when you visit it or simply click any
 button to get to the login page
-login using admin and password = 123
+login using demo and password = 123
+
+## Setup Locally
+-clone the github repository: git clone https://github.com/sswan3/cs4300.git
+-run these lines of code: 
+-cd cs4300/homework2/movie_theater_booking
+-python3 -m venv myenv --system -site -packages
+-source myenv/bin/activate
+-pip install django djangorestframework
+-python3 -m venv myenv
+-source myenv/bin/activate
+-pip install -r requirements.txt
+-python manage.py migrate
+-RUN "python manage.py test" TO RUN TESTS
+-RUN "python manage.py runserver 0.0.0.0:3000" TO OPEN SITE
 
 ## How to Navigate
 
