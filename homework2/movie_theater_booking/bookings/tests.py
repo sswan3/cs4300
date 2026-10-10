@@ -7,7 +7,7 @@ from rest_framework.test import APITestCase
 from rest_framework import status
 
 class SeatViewSetTestCase(APITestCase):
-    def setUP(self):
+    def setUp(self):
         self.movie = Movie.objects.create(
             title="My Little Pony",
             description="friendship and love is learned",
@@ -23,12 +23,14 @@ class SeatViewSetTestCase(APITestCase):
 
         # Authenticate the pre-built test client
         self.client.force_authenticate(user=user1)
-        self.client.force_authenticate(user=user2)
 
         today = date.today()
 
-        Booking.objects.create(movie= self.movie, user = self.user1, seat= self.seat1, booking_date= today)
-        Booking.objects.create(movie = self.movie, user= self.user2, booking_date=today,seat =self.seat2)
+        book1 = Booking.objects.create(movie= self.movie, user = user1, seat=seat1, booking_date= today)
+        book2 = Booking.objects.create(movie = self.movie, user= user2, booking_date=today,seat =seat2)
+
+        response = self.client.post('/api/bookings/', book1, format='json')
+        self.assertEqual(Booking.objects.count(), 1)
 
 
 class BookingViewSetTestCase(APITestCase):
