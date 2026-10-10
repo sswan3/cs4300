@@ -3,6 +3,7 @@ from .models import Movie, Seat, Booking
 from django.core.exceptions import ValidationError
 from django.contrib.auth.models import User
 from datetime import date
+import unittest
 
 class MovieTestCase(TestCase):
     def setUp(self):
@@ -16,14 +17,15 @@ class MovieTestCase(TestCase):
         self.assertEqual(str(movie.release_date), "2026-11-14")
         self.assertEqual(movie.duration, 2)
 
-class IncorrectMovieTestCase(TestCase):
-    def setUp(self):
-        Movie.objects.create(title="My Little Pony", description="friendship and love is learned"
-        ,release_date = "2026-11-14", duration="not_a_number")
+class IncorrectMovieTestCase(unittest.TestCase):
 
     def test_values(self):
-        movie = Movie.objects.get(title="My Little Pony")
-        self.assertIsInstance(movie.duration, str) 
+         
+         with self.assertRaises(TypeError):
+            Movie.objects.create(title="My Little Pony", description="friendship and love is learned"
+            ,release_date = "2026-11-14", duration="not_a_number")
+            movie = Movie.objects.get(title="My Little Pony")
+            self.assertIsInstance(movie.duration, int) 
 
 
 class SeatTestCase(TestCase):
