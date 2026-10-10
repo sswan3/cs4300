@@ -21,11 +21,10 @@ class availabilityTestCase(APITestCase):
         self.client.force_login(user)
         response = self.client.get('/api/seats/availability/')
 
-        for s in response.data:
-            self.assertNotEqual(s, seat2.id)
-            if s ==seat1.id:
-                self.AssertEqual(s, seat1.id)
-
+        ids = [s["id"] for s in response.data]
+        self.assertNotIn(seat2.id, ids)
+        self.assertIn(seat1.id, ids)
+        
 class SeatViewSetTestCase(APITestCase):
     def setUp(self):
         self.movie = Movie.objects.create(
