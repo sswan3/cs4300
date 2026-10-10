@@ -10,6 +10,7 @@ Django==6.1.1
 django-bootstrap5==26.3
 django-filter==26.1
 djangorestframework==3.18.1
+gunicorn==26.2.0
 gyp==0.1
 Markdown==3.11
 parse==1.22.2
