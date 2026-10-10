@@ -17,15 +17,14 @@ class MovieTestCase(TestCase):
         self.assertEqual(str(movie.release_date), "2026-11-14")
         self.assertEqual(movie.duration, 2)
 
-class IncorrectMovieTestCase(unittest.TestCase):
+class IncorrectMovieTestCase(TestCase):
 
     def test_values(self):
-        Movie.objects.create(title="My Little Pony", description="friendship and love is learned"
-        ,release_date = "2026-11-14", duration="not_a_number")
-        movie = Movie.objects.get(title="My Little Pony")
 
         with self.assertRaises(ValueError):
-            self.assertIsInstance(movie.duration, int) 
+            Movie.objects.create(title="My Little Pony", description="friendship and love is learned"
+            ,release_date = "2026-11-14", duration="not_a_number")
+            #self.assertIsInstance(movie.duration, int) 
 
 
 class SeatTestCase(TestCase):
@@ -57,12 +56,12 @@ class BookTestCase(TestCase):
         )
 
     def test_booking_storage(self):
-        book = Booking.objects.get(booking_date="2026-10-9")
+        today = date.today()
+        book = Booking.objects.get(booking_date=today)
         self.assertEqual(book.movie.title, "Avengers")
         self.assertEqual(book.movie.description, "fighting and blood occurs")
         self.assertEqual(book.movie.duration, 3)
         self.assertEqual(book.movie.release_date, date(2026, 12, 25))
-        today = date.today()
         self.assertEqual(book.seat.seat_number, 77)
         self.assertEqual(book.seat.booking_status, False)
         self.assertEqual(book.user.username, "testuser")
