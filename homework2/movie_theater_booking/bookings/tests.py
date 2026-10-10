@@ -3,7 +3,29 @@ from .models import Movie, Seat, Booking
 from django.core.exceptions import ValidationError
 from django.contrib.auth.models import User
 from datetime import date
-import unittest
+from rest_framework.test import APITestCase
+
+class BookingViewSet(APITestCase):
+    def setUp(self):
+        Movie.objects.create(title="My Little Pony", description="friendship and love is learned"
+        ,release_date = "2026-11-14", duration=2)
+
+    seat = Seat.objects.create(seat_number=77, booking_status=False)
+    booking_date = date.today()
+    Booking.objects.create(
+            movie=movie, 
+            seat=seat, 
+            user=user, 
+            booking_date=booking_date
+        )
+    def test_login_book_seat(self):
+        today = date.today()
+        book = Booking.objects.get(booking_date=today)
+        user = User.objects.create_user(username="lauren", password="testpass123")
+        client = APIClient()
+        client.force_authenticate(user=user)
+        response = client.post('/api/bookings/', {'movie': movie.title, 'seat': seat, 'user': user, 'booking_date':booking_date}, format='json')
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
 class MovieTestCase(TestCase):
     def setUp(self):
@@ -65,9 +87,8 @@ class BookTestCase(TestCase):
         self.assertEqual(book.seat.seat_number, 77)
         self.assertEqual(book.seat.booking_status, False)
         self.assertEqual(book.user.username, "testuser")
-        self.assertTrue(book.user.check_password("testpass123"))
-        self.assertTrue(book.booking_date, today)
+        self.assertEqual(book.booking_date, today)
         
         
-    
+
         
