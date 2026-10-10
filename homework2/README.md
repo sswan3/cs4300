@@ -8,10 +8,13 @@ login using admin and password = 123
 
 ## How to Navigate
 
-Click Home to go to the main selection that shows all the movies
-Click Book Now to book a certain movie
-Click a green seat to choose where you want to sit
-Click Dropdown -> Booking History to see past tickets you've booked. Including the one you made now!
+-Click Home to go to the main selection that shows all the movies
+
+-Click Book Now to book a certain movie
+
+-Click a green seat to choose where you want to sit
+
+-Click Dropdown -> Booking History to see past tickets you've booked. Including the one you made now!
 
 
 ## Running Tests
