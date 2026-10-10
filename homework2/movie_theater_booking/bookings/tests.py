@@ -29,9 +29,10 @@ class SeatViewSetTestCase(APITestCase):
         book1 = Booking.objects.create(movie= self.movie, user = user1, seat=seat1, booking_date= today)
         book2 = Booking.objects.create(movie = self.movie, user= user2, booking_date=today,seat =seat2)
 
-        response = self.client.post('/api/bookings/', book1, format='json')
-        self.assertEqual(Booking.objects.count(), 1)
+        response = self.client.get('/api/bookings/')
 
+        self.assertEqual(len(response.data), 1)
+        self.assertEqual(response.data[0]["user"], user1.id)
 
 class BookingViewSetTestCase(APITestCase):
     def setUp(self):
